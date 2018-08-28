@@ -91,10 +91,10 @@ bool CDX9Renderer::Init(HWND hWnd, bool bWindow, int nWindowWidth, int nWindowHe
 
 	VERTEX3D v[4] =
 	{
-		{ { 10.0f,0.0f, 0.0f },{ 0.0f,1.0f,0.0f }, D3DCOLOR(D3DCOLOR_RGBA(255,255,255,255)),{ 0.0f,0.0f } },
-		{ { 10.0f,0.0f,10.0f },{ 0.0f,1.0f,0.0f }, D3DCOLOR(D3DCOLOR_RGBA(255,255,255,255)),{ 1.0f,0.0f } },
-		{ { -10.0f,0.0f,10.0f },{ 0.0f,1.0f,0.0f }, D3DCOLOR(D3DCOLOR_RGBA(255,255,255,255)),{ 1.0f,1.0f } },
-		{ { -10.0f,0.0f, 0.0f },{ 0.0f,1.0f,0.0f }, D3DCOLOR(D3DCOLOR_RGBA(255,255,255,255)),{ 1.0f,0.0f } },
+		{ {  10.0f,-5.0f, 0.0f },{ 0.0f,1.0f,0.0f }, D3DCOLOR(D3DCOLOR_RGBA(255,255,255,255)),{ 0.0f,0.0f } },
+		{ {  10.0f,5.0f, 0.0f },{ 0.0f,1.0f,0.0f }, D3DCOLOR(D3DCOLOR_RGBA(255,255,255,255)),{ 1.0f,0.0f } },
+		{ { -10.0f,5.0f, 0.0f },{ 0.0f,1.0f,0.0f }, D3DCOLOR(D3DCOLOR_RGBA(255,255,255,255)),{ 1.0f,1.0f } },
+		{ { -10.0f,-5.0f, 0.0f },{ 0.0f,1.0f,0.0f }, D3DCOLOR(D3DCOLOR_RGBA(255,255,255,255)),{ 1.0f,0.0f } },
 	};
 
 	memcpy(&pV[0], &v[0], sizeof(VERTEX3D) * 4);
@@ -129,7 +129,7 @@ bool CDX9Renderer::Init(HWND hWnd, bool bWindow, int nWindowWidth, int nWindowHe
 	rendererobject_.emplace_back(object);
 	memcpy(&pIndex[0], &index[0], sizeof(WORD) * 6);
 	Cube->index_buffer->Unlock();
-	camera_ = new CCamera({ 0.0f,0.0f,0.0f }, { 0.0f, 90.0f,-30.0f }, { 0.0f,1.0f,0.0f });
+	camera_ = new CCamera({ 0.0f,0.0f,0.0f }, { 0.0f, 5.0f,-20.0f }, { 0.0f,1.0f,0.0f });
 	//light_ = new CLight()
 	return true;
 }
@@ -174,11 +174,11 @@ void CDX9Renderer::Draw()
 	
 		device_->SetStreamSource(0, mesh->vertex_buffer, 0, sizeof(VERTEX3D));
 		device_->SetIndices(mesh->index_buffer);
+		device_->SetTexture(0, textureinfo_["Cube"]->texture);
 	}
 	device_->SetFVF(FVF_VERTEX3D);
 	device_->SetRenderState(D3DRS_LIGHTING, false);
 	device_->SetTransform(D3DTS_WORLD, &world);
-	device_->SetTexture(0, textureinfo_["Cube"]->texture);
 	device_->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
 	//device_->SetStreamSource(0, meshinfo_["Cube"]->vertex_buffer, 0, sizeof(VERTEX3D));
 	//device_->SetIndices(meshinfo_["Cube"]->index_buffer);

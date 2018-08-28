@@ -1,5 +1,5 @@
 #include "main.h"
-
+#include "DX9Renderer\Renderer.h"
 //ウィンドウズの画面に着ける名前
 const std::string CLASS_NAME = "Enemy Using Behaviortree";
 const std::string WINDOW_NAME = "FrameWork";
@@ -11,6 +11,7 @@ void Uninit(void);
 void Update(void);
 void Draw(void);
 
+CDX9Renderer* dx9render;
 //main関数
 //画面の作成＆オブジェクト事の初期化、更新、描画、削除をさせる関数
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevinstance, LPSTR lpCmdLine, int nCmdShow)
@@ -162,6 +163,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			{
 				DestroyWindow(hWnd);
 			}
+			else 
+			{
+				return 0;
+			}
 		}
 		break;
 
@@ -194,20 +199,25 @@ bool Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow, int nWindowWidth, int nW
 
 	bWindow >= 1 ? bSetWindow = true : bSetWindow = false;
 	
+	dx9render = new CDX9Renderer();
+	dx9render->Init(hWnd,true,nWindowWidth,nWindowHeight);
+
 	return true;
 }
 
 void Uninit(void)
 {
-
+	dx9render->Uninit();
+	delete dx9render;
+	dx9render = NULL;
 }
 
 void Update(void)
 {
-
+	dx9render->Update();
 }
 
 void Draw(void)
 {
-
+	dx9render->Draw();
 }
