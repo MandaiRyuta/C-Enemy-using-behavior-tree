@@ -199,12 +199,15 @@ bool Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow, int nWindowWidth, int nW
 
 void Uninit(void)
 {
+
 }
 
 void Update(void)
 {
+
 }
 
 void Draw(void)
 {
+
 }
