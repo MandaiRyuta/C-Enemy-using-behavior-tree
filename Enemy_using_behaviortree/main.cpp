@@ -88,6 +88,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevinstance, LPSTR lpCmdLi
 	// タイマーの性能を上げる
 	timeBeginPeriod(1);
 
+
+
 	// 初期化(チェックあり)
 	if (!Init(hInstance, hWnd, true, nWindowWidth, nWindowHeight))
 	{
