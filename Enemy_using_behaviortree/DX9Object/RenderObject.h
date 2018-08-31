@@ -4,7 +4,7 @@
 class RenderObject
 {
 public:
-	RenderObject() { meshkey_ = "Cube"; }
+	RenderObject(std::string ObjName) { meshkey_ = ObjName; }
 	~RenderObject() {}
 
 public:

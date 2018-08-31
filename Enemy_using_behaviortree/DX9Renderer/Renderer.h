@@ -60,7 +60,9 @@ public:
 	void Uninit();
 	void Update();
 	void Draw();
-
+private:
+	bool DX9Init(HWND hWnd, bool bWindow, int nWindowWidth, int nWindowHeight);
+	void TargetObject();
 private:
 	std::unordered_map<std::string, MeshInfomation*> meshinfo_;
 	std::unordered_map<std::string, Textureinfomation*> textureinfo_;
